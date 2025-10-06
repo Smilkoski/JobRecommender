@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block title %}Your Profile{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Edit Profile</h2>
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div class="mb-3">
+                {{ form.skills_text.label_tag }}
+                {{ form.skills_text }}
+                <div class="form-text">{{ form.skills_text.help_text }}</div>
+            </div>
+            <div class="mb-3">
+                {{ form.resume.label_tag }}
+                {{ form.resume }}
+            </div>
+            <button class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

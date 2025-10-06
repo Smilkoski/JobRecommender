@@ -4,11 +4,11 @@ services:
     environment:
       POSTGRES_DB: job_recommender
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: your_secure_password_here  # Change this!
+      POSTGRES_PASSWORD: mypassword
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
-      - "5432:5432"  # Expose if you wanna connect externally (e.g., pgAdmin)
+      - "5432:5432"
 
   redis:
     image: redis:7-alpine
@@ -16,10 +16,10 @@ services:
       - "6379:6379"
 
   app:
-    build: .  # Uses your Dockerfile
+    build: .
     command: python manage.py runserver 0.0.0.0:8000  # Dev mode; swap to gunicorn for prod
     volumes:
-      - .:/app  # Hot reload magic
+      - .:/app
     ports:
       - "8000:8000"
     environment:
@@ -28,7 +28,6 @@ services:
     depends_on:
       - db
       - redis
-    # For Celery later: Add a celery service here if you want it running
 
 volumes:
   postgres_data:
